@@ -162,6 +162,7 @@ def download(sock_s, sock_r, buffer, s_ip, d_ip, port, file_name):
 
         if (header_t_unpacked[5] == 17 or header_t_unpacked[5] == 25) and header_t_unpacked[
             1] == port and address_destination == d_ip and content_size == 0:
+            count += 1
             header_i = generate_header_ip(54322, s_ip, d_ip)
             CWND = set_congestion_control(CWND, AWND, True)
             data_in_finpacket = ''
@@ -175,6 +176,7 @@ def download(sock_s, sock_r, buffer, s_ip, d_ip, port, file_name):
             write(file_name, res)
             break
         elif header_t_unpacked[1] == port and address_destination == d_ip and content_size == 0 and count > 0:
+            count += 1
             write(file_name, res)
             break
 
